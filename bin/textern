@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+main() {
+  local fn
+  fn="${1}"
+
+  local lang
+
+  case "${fn}" in
+    *blog.hatena.ne.jp* ) lang=ja ;;
+    *github.com*) lang=en ;;
+    *) lang=ja ;
+  esac
+
+  exec nvim --cmd "let g:textlintrc=\"${lang}"\" "${@:-}"
+}
+
+main "${@:-}"
